@@ -165,3 +165,69 @@ git remote add origin git@gitHub.com:itsorphic/mysite.git
 git branch -M main
 git push -u origin main
 ```
+
+---
+
+# Configure Deployment from GitHub to S3
+
+1. In the AWS Console, go to **IAM** -> **Identity Providers** -> **Add Provider**
+2. Enter the URL provided [by GitHub](https://docs.github.com/en/actions/security-for-github-actions/security-hardening-your-deployments/configuring-openid-connect-in-amazon-web-services#adding-the-identity-provider-to-aws), right now it's `https://token.actions.githubusercontent.com`.
+
+![Add provider](/img/Deploying-My-Blog/addprovider.png)
+
+We have just given AWS a way to authenticate the incoming requests that GitHub actions will send.
+Now we need to create a role with permisisons for those actions.
+
+3. Go to **IAM** -> **Roles** -> **Create role**
+
+![Add provider](/img/Deploying-My-Blog/addprovider2.png)
+
+4. Skip the "Add Permission" as we will be adding permissions in another way.
+5. Choose a descriptive name and confirm the policy looks good and click *Create role*.
+
+![Add provider](/img/Deploying-My-Blog/addprovider3.png)
+
+6. Click on the newly created role -> **Add permissions** -> **Create inline policy**
+7. Add the following policy:
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "SyncToBucket",
+			"Effect": "Allow",
+			"Action": [
+				"s3:PutObject",
+				"s3:GetObject",
+				"s3:ListBucket",
+				"s3:DeleteObject"
+			],
+			"Resource": [
+				"arn:aws:s3:::itsorphic.com/*",
+				"arn:aws:s3:::itsorphic.com"
+			]
+		}
+	]
+}
+```
+8. Create a second policy allowing this role to nvalidate (flush) the CloudFront cache.
+```json
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "FlushCache",
+			"Effect": "Allow",
+			"Action": "cloudfront:CreateInvalidation",
+			"Resource": "arn:aws:cloudfront::123456789012:distribution/E14AXN8IQCRSF4"
+		}
+	]
+}
+```
+
+---
+
+# Configure the GitHub Workflow
+
+1. First, create the following variables in your repository:
+![Add provider](/img/Deploying-My-Blog/variables.png)
