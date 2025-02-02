@@ -1,0 +1,56 @@
+[404message]
+other = "das ist nicht die Seite die Ihr sucht."
+
+[searchbarTxt]
+other = "Suchen"
+
+[tags]
+other = "Tags"
+
+[date]
+other = "Datum"
+
+[continueReading]
+other = "Weiter Lesen"
+
+[previousPage]
+other = "vorherige Seite"
+
+[nextPage]
+other = "Nächste Seite"
+
+[shareOnTheFediverse]
+other = "Teilen im Fediverse"
+
+[enterFediverseInstanceAddress]
+other = "Trage deine Instanzadresse hier ein"
+
+[fediverseInstanceExample]
+other = "Z.b. mastodon.social"
+
+[cancel]
+other = "Abbrechen"
+
+[share]
+other = "Teilen"
+
+[home]
+other = "Home"
+
+[posts]
+other = "Posts"
+
+[search]
+other = "Search"
+
+[tagsColumn]
+other = "Tags:"
+
+[tagColumn]
+other = "Tag:"
+
+[morePostsLikeThis]
+other = "Mehr Posts wie dieser"
+
+[noResultsFound]
+other = "Nichts gefunden"

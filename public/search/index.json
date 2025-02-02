@@ -1,0 +1,21 @@
+
+{
+    
+    
+    
+    
+        
+        
+        
+    
+        
+        
+        
+    
+        
+        
+        
+    
+    "pages": [{"date":"2025-02-02","image":"","imageAlt":"","link":"http://localhost:1313/pages/about/","summary":"orphic (miguelcardoso) I got by a bunch of names, and I change it frequently, but for now, let\u0026rsquo;s go with orphic.\nAnd that\u0026rsquo;s it. Email if you want to know more.","tags":[],"text":"orphic (miguelcardoso) i got by a bunch of names, and i change it frequently, but for now, let\u0026rsquo;s go with orphic.\nand that\u0026rsquo;s it. email if you want to know more.\njob experience cloud security engineer @ ctw (bmw group) - present breaker of things @ everywhere - present soc analyst t1, t2, t2 @ jolera network technician @ jolera it support @ trovisca multimedia designer @ porto canal mcdonalds slave @ obv\u0026hellip; unemployed artist certifications \u0026amp; education actively studying for: junior penetration tester (ejpt) anciber - national academy of cybersecurity aws - certified cloud practitioner isc2 - certificed in cybersecurity (cc) csi linux - certified investigator a bunch of outdated vendor specific network/security certs ","title":"About"},{"date":"2025-02-02","image":"","imageAlt":"","link":"http://localhost:1313/posts/deploying-my-blog---the-cheap-and-cloudy-way/","summary":"A step-by-step guide on how I deployed this website using Hugo and AWS.\nCreating your first Hugo blog Spin up a terminal and do the following: sudo apt install hugo cd hugo new site mysite This will prompt Hugo to create the required files for a base blog.","tags":[],"text":"a step-by-step guide on how i deployed this website using hugo and aws.\ncreating your first hugo blog spin up a terminal and do the following: sudo apt install hugo cd hugo new site mysite this will prompt hugo to create the required files for a base blog. now you need to find a theme that you like. you can find plenty here. i chose hugo-ficurinia. once you have found a theme you are happy with, you have to set it up as follows: cd ~/mysite/ git clone \u0026lt;github url of your theme\u0026gt; /themes/ cd .. now move the example site into your website root so that hugo knows how to display it: rm -rf content/ static/ config.toml cp -r themes/\u0026lt;yourthemename\u0026gt;/examplesite/* . now all you need to do is generate the site. # generate the site hugo # generate the site and start a local server to preview it hugo server -d open your web browser and in the url bar type localhost:1313 you should now see your site!\nyou can now further customize your site accoding to your theme. for more information on hugo you can check: hugo quick start guide freecodecamp hugo guide kinsta guide to hugo buying a domain name once you have your website ready you will need to buy a domain name. for this, and since we will be using aws s3 to host our website, we will also be using aws route53\u0026rsquo;s for our domain needs.\nhead over to aws route53 page. under registered domains click on register domain. choose the domain you want. in this case, our .com costed ~$14. go back to route53 -\u0026gt; hosted zones -\u0026gt; your domain. this is where we will be adding our dns records later on. creating an s3 bucket ","title":"Deploying My Blog   the Cheap and Cloudy Way"},{"date":"0001-01-01","image":"","imageAlt":"","link":"http://localhost:1313/writeups/","summary":"Feel free to contribute to this guide! Browse the source on GitLab","tags":[],"text":"feel free to contribute to this guide! browse the source on gitlab\n","title":"Arch Guide"}]
+}
+

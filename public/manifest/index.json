@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "orphic",
+  "short_name": "orphic",
+  "start_url": "/",
+  "display": "standalone",
+  
+  
+  
+  "background_color": "#000000",
+  "theme_color": "#273e97"
+  
+    ,
+    "description": "orphic's meta thoughts"
+  
+  
+    ,
+    "icons": [
+      {
+        "src": "/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "/android-chrome-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "any"
+      }
+    ]
+  
+}
+

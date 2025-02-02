@@ -1,0 +1,56 @@
+[404message]
+other = "Esta não é a página que procuras"
+
+[searchbarTxt]
+other = "Pesquisar"
+
+[tags]
+other = "Etiquetas"
+
+[date]
+other = "Data"
+
+[continueReading]
+other = "Continuar a ler"
+
+[previousPage]
+other = "Página anterior"
+
+[nextPage]
+other = "Página seguinte"
+
+[shareOnTheFediverse]
+other = "Partilhar no Fediverso"
+
+[enterFediverseInstanceAddress]
+other = "Inserir o endereço da instância"
+
+[fediverseInstanceExample]
+other = "ex: mastodon.social"
+
+[cancel]
+other = "Cancelar"
+
+[share]
+other = "Partilhar"
+
+[home]
+other = "Página Inicial"
+
+[posts]
+other = "Publicações"
+
+[search]
+other = "Pesquisar"
+
+[tagsColumn]
+other = "Etiquetas:"
+
+[tagColumn]
+other = "Etiqueta:"
+
+[morePostsLikeThis]
+other = "Mais publicações como esta"
+
+[noResultsFound]
+other = "Não foram encontrados resultados"

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><?xml-stylesheet href="/feed_style.xsl" type="text/xsl"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="https://www.rssboard.org/media-rss">
+  <channel>
+    <title>Posts on orphic</title>
+    <link>http://localhost:1313/posts/</link>
+    <description>Recent content in Posts on orphic</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>orphic - [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).</copyright>
+    <lastBuildDate>Sun, 02 Feb 2025 16:13:14 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" /><icon>http://localhost:1313/logo.svg</icon>
+    
+    
+    <item>
+      <title>Deploying My Blog   the Cheap and Cloudy Way</title>
+      <link>http://localhost:1313/posts/deploying-my-blog---the-cheap-and-cloudy-way/</link>
+      <pubDate>Sun, 02 Feb 2025 16:13:14 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/deploying-my-blog---the-cheap-and-cloudy-way/</guid>
+      <description><![CDATA[<p>A step-by-step guide on how I deployed this website using Hugo and AWS.</p>
+<hr>
+<h1 id="creating-your-first-hugo-blog">Creating your first Hugo blog</h1>
+<ol>
+<li>Spin up a terminal and do the following:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo apt install hugo
+</span></span><span style="display:flex;"><span><span style="color:#cd00cd">cd</span>
+</span></span><span style="display:flex;"><span>hugo new site mysite
+</span></span></code></pre></div><ol start="2">
+<li>This will prompt Hugo to create the required files for a base blog. Now you need to find a theme that you like. You can find plenty <a href="https://themes.gohugo.io/">here</a>. I chose <strong>Hugo-Ficurinia</strong>. Once you have found a theme you are happy with, you have to set it up as follows:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#cd00cd">cd</span> ~/mysite/
+</span></span><span style="display:flex;"><span>git clone &lt;github url of your theme&gt; /themes/
+</span></span><span style="display:flex;"><span><span style="color:#cd00cd">cd</span> ..
+</span></span></code></pre></div><ol start="3">
+<li>Now move the example site into your website root so that Hugo knows how to display it:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>rm -rf content/ static/ config.toml
+</span></span><span style="display:flex;"><span>cp -r themes/&lt;yourThemeName&gt;/exampleSite/* .
+</span></span></code></pre></div><ol start="4">
+<li>Now all you need to do is generate the site.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#000080"># Generate the site</span>
+</span></span><span style="display:flex;"><span>hugo
+</span></span><span style="display:flex;"><span><span style="color:#000080"># Generate the site and start a local server to preview it</span>
+</span></span><span style="display:flex;"><span>hugo server -D
+</span></span></code></pre></div><p>Open your web browser and in the URL bar type <code>localhost:1313</code> You should now see your site!</p>
+<ol start="5">
+<li>You can now further customize your site accoding to your theme. For more information on Hugo you can check:</li>
+</ol>
+<ul>
+<li><a href="https://gohugo.io/getting-started/quick-start/">Hugo Quick Start Guide</a></li>
+<li><a href="https://www.freecodecamp.org/news/your-first-hugo-blog-a-practical-guide/">FreeCodeCamp Hugo Guide</a></li>
+<li><a href="https://kinsta.com/blog/hugo-static-site/">Kinsta Guide To Hugo</a></li>
+</ul>
+<hr>
+<h1 id="buying-a-domain-name">Buying a domain name</h1>
+<p>Once you have your website ready you will need to buy a domain name. For this, and since we will be using AWS S3 to host our website, we will also be using AWS <a href="https://us-east-1.console.aws.amazon.com/route53/v2/home?region=eu-west-1#Dashboard">Route53&rsquo;s</a> for our domain needs.</p>
+<ol>
+<li>Head over to AWS Route53 page.</li>
+<li>Under <strong>Registered Domains</strong> click on Register Domain.</li>
+<li>Choose the domain you want. In this case, our <code>.com</code> costed ~$14.</li>
+<li>Go back to <strong>Route53</strong>-&gt;<strong>Hosted zones</strong>-&gt;<strong>Your domain</strong>. This is where we will add our DNS records later on.</li>
+</ol>
+<hr>
+<h1 id="creating-an-s3-bucket">Creating an S3 Bucket</h1>
+<p><img src="/img/Deploying-My-Blog/bucket.png" alt="Creating an S3 bucket"></p>
+<ol>
+<li>After creating your bucket, go to the <strong>Properties</strong> tab.</li>
+<li>Go all the way down to &ldquo;<strong>Static website hosting</strong>&rdquo; and click <em>Edit</em>.</li>
+</ol>
+<p><img src="/img/Deploying-My-Blog/bucketwebhosting.png" alt="Enable S3 Web hosting"></p>
+<ol start="3">
+<li>Go to <strong>Permissions</strong> tab.</li>
+<li><em>Edit</em> <strong>Block public access</strong> and make sure it&rsquo;s not blocked.</li>
+</ol>
+<p><img src="/img/Deploying-My-Blog/bucketallow.png" alt="Allow S3 Publick access"></p>
+<ol start="5">
+<li><em>Edit</em> the <strong>Bucket policy</strong> and add the following:</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    &#34;Version&#34;:<span style="color:#cd0000">&#34;2012-10-17&#34;</span>,
+</span></span><span style="display:flex;"><span>    &#34;Statement&#34;: [
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            &#34;Sid&#34;:<span style="color:#cd0000">&#34;PublicReadGetObject&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;Effect&#34;:<span style="color:#cd0000">&#34;Allow&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;Principal&#34;:<span style="color:#cd0000">&#34;*&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;Action&#34;:<span style="color:#cd0000">&#34;s3:GetObject&#34;</span>,
+</span></span><span style="display:flex;"><span>            &#34;Resource&#34;:<span style="color:#cd0000">&#34;arn:aws:s3:::&lt;YOUR-BUCKET-NAME&gt;/*&#34;</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    ]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Our bucket is now read-only for The World!</p>
+<hr>
+<h1 id="route-traffic-using-route53">Route traffic using Route53</h1>
+<p>Our S3 bucket link <code>http://YOUR_BUCKET_NAME.s3-website-eu-west-1.amazonaws.com/</code> works, but now we want to route the traffic through the domain that we have just bought. For this, we will be using AWS Route53.</p>
+<ol>
+<li>Go to <strong>Route53</strong> -&gt; <strong>Hosted zones</strong> -&gt; <strong>Create hosted zone</strong></li>
+</ol>
+<p><img src="/img/Deploying-My-Blog/hostedzone.png" alt="Create a Hosted Zone"></p>
+<ol start="2">
+<li>Click on your new Hosted Zone and then <strong>Create record</strong>.</li>
+</ol>
+<p><img src="/img/Deploying-My-Blog/createrecord.png" alt="Create record"></p>
+<p>We will revisit the remaining configuration once we have created our CloudFront distribution, for now, you should leave it just like this.</p>
+<hr>
+<h1 id="secure-and-fast-with-cloudfront">Secure and Fast with CloudFront</h1>
+<p>Now it&rsquo;s time to configure our site to use <strong>HTTPs</strong>. There are many ways that we could do this, but again, if we are on AWS, we will keep it so.</p>
+<ol>
+<li>Open <strong>AWS Certificate Manager</strong></li>
+<li>Click on <strong>Request Certificate</strong></li>
+</ol>
+<p><img src="/img/Deploying-My-Blog/certificate.png" alt="Certificate manager">
+<img src="/img/Deploying-My-Blog/certificate2.png" alt="Certificate manager"></p>
+<ol start="3">
+<li>Click on your newly requested certificated.</li>
+<li>Take note of the values in &ldquo;<em>CNAME name</em>&rdquo;.</li>
+<li>Go again to <strong>Route53</strong> -&gt; <strong>Hosted zones</strong> and click on the one we just created.</li>
+<li>Click on <strong>Create record</strong>.</li>
+<li>Add a new CNAME record using the name of one of one of the two domains you registered in the last step.</li>
+</ol>
+<p><strong>Note:</strong> In the <em>subdomain</em> you want only the prefix of the proof record.
+For ex, if the <em>CNAME name</em> value is <code>_78978897897eeeeqwewqe78970787.itsorphic.com.</code>, the value in the subdomain field should be entered as: <code>_78978897897eeeeqwewqe78970787</code>.</p>
+<p>Create the record and within a few seconds to minutes the certificate status should change to <strong>Issued</strong>.</p>
+<p>Now that we have a valid certificate, we can configure <strong>HTTPS</strong> using CloudFront.</p>
+<ol>
+<li>Go to <strong>CloudFront</strong> -&gt; <strong>Distributions</strong> -&gt; <strong>Create</strong>
+<img src="/img/Deploying-My-Blog/distribution.png" alt="Distributions"></li>
+<li>Redirect http trafic to https
+<img src="/img/Deploying-My-Blog/distribution2.png" alt="alt text"></li>
+</ol>
+<p>We will leave WAF disabled for know, but you should give it some thought if it&rsquo;s worth it for your usecase.
+<img src="/img/Deploying-My-Blog/waf.png" alt="alt text">
+<img src="/img/Deploying-My-Blog/distribution3.png" alt="alt text"></p>
+<hr>
+<h1 id="direct-traffic-to-cloudfront-distribution">Direct Traffic to CloudFront distribution</h1>
+<p>Now we can revisit our DNS configuration.</p>
+<ol>
+<li>Go to <strong>Route53</strong> -&gt; <strong>Hosted zones</strong> -&gt; <strong>Your hosted zone</strong> -&gt; <strong>Create record</strong></li>
+<li>First we will add (or replace) the A Record for the <code>**www.subdomain **</code></li>
+</ol>
+<p><img src="/img/Deploying-My-Blog/arecord.png" alt="alt text"></p>
+<ol start="3">
+<li>Now we create another record:
+<img src="/img/Deploying-My-Blog/arecord2.png" alt="alt text"></li>
+</ol>
+<p>We are all set, the internet traffic should now flow to the CloudFront distribution. You should be able to test and observe that when you enter <code>http://</code> you get redirected automatically to <code>https://</code>.</p>
+<hr>
+<h1 id="storing-sourcecode-in-github">Storing sourcecode in GitHub</h1>
+<p>Straightforward. Push your code to GitHub.</p>
+<div class="highlight"><pre tabindex="0" style="color:#ccc;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#cd00cd">cd</span> mysite
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#cd0000">&#34;my first commit&#34;</span>
+</span></span><span style="display:flex;"><span>git remote add origin git@gitHub.com:itsorphic/mysite.git
+</span></span><span style="display:flex;"><span>git branch -M main
+</span></span><span style="display:flex;"><span>git push -u origin main
+</span></span></code></pre></div>]]></description>
+      
+    </item>
+    
+    
+  </channel>
+</rss>
